@@ -13,6 +13,17 @@ export interface Item {
 }
 
 /**
+ * Interface of parameter `deep` of {@link traverseFileSystem}
+ */
+export interface DeepFunc {
+  /**
+   * @param param Current item
+   * @returns `true` to explore current item, `false` otherwise
+   */
+  (param: Item): boolean
+}
+
+/**
  * Traverse a file system tree
  * @param container Root of the tree
  * @param deep Determine whether a particular directory should be explored
@@ -20,7 +31,7 @@ export interface Item {
  */
 export async function * traverseFileSystem (
   container: string,
-  deep: (param: Item) => boolean
+  deep: DeepFunc
 ): AsyncGenerator<Item, void, unknown> {
   for (const info of await Deno.readdir(container)) {
     const isDirectory = info.isDirectory()

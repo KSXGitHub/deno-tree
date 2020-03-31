@@ -9,7 +9,7 @@ export interface Item {
 export async function * traverseFileSystem (
   container: string,
   deep: (param: Item) => boolean
-): AsyncGenerator<Item> {
+): AsyncGenerator<Item, void, unknown> {
   for (const info of await Deno.readdir(container)) {
     const isDirectory = info.isDirectory()
     const item: Item = {

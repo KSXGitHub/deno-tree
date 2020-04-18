@@ -7,7 +7,7 @@ export interface Item {
   /** Path to directory that contains current item */
   readonly container: string;
   /** Stat info and name of current item */
-  readonly info: Deno.FileInfo;
+  readonly info: Deno.DirEntry;
 }
 
 /**

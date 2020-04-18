@@ -1,13 +1,13 @@
-import { join } from './deps.ts'
+import { join } from "./deps.ts";
 
 /**
  * Type of values that {@link traverseFileSystem} yields
  */
 export interface Item {
   /** Path to directory that contains current item */
-  readonly container: string
+  readonly container: string;
   /** Stat info and name of current item */
-  readonly info: Deno.FileInfo
+  readonly info: Deno.FileInfo;
 }
 
 /**
@@ -18,7 +18,7 @@ export interface DeepFunc {
    * @param param Current item
    * @returns `true` to explore current item, `false` otherwise
    */
-  (param: Item): boolean
+  (param: Item): boolean;
 }
 
 /**
@@ -27,20 +27,20 @@ export interface DeepFunc {
  * @param deep Determine whether a particular directory should be explored
  * @returns An async iterator of {@link Item}
  */
-export async function * traverseFileSystem (
+export async function* traverseFileSystem(
   container: string,
-  deep: DeepFunc
+  deep: DeepFunc,
 ): AsyncGenerator<Item, void, unknown> {
   for await (const info of Deno.readdir(container)) {
     const item: Item = {
       container,
-      info
-    }
-    yield item
+      info,
+    };
+    yield item;
     if (info.isDirectory && deep(item)) {
-      yield * traverseFileSystem(join(container, info.name!), deep)
+      yield* traverseFileSystem(join(container, info.name!), deep);
     }
   }
 }
 
-export default traverseFileSystem
+export default traverseFileSystem;

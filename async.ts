@@ -38,7 +38,7 @@ export async function* traverseFileSystem(
     };
     yield item;
     if (info.isDirectory && deep(item)) {
-      yield* traverseFileSystem(join(container, info.name!), deep);
+      yield* traverseFileSystem(join(container, info.name), deep);
     }
   }
 }

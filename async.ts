@@ -8,8 +8,6 @@ export interface Item {
   readonly container: string
   /** Stat info and name of current item */
   readonly info: Deno.FileInfo
-  /** Wether current item is a directory */
-  readonly isDirectory: boolean
 }
 
 /**
@@ -33,15 +31,13 @@ export async function * traverseFileSystem (
   container: string,
   deep: DeepFunc
 ): AsyncGenerator<Item, void, unknown> {
-  for (const info of await Deno.readdir(container)) {
-    const isDirectory = info.isDirectory()
+  for await (const info of Deno.readdir(container)) {
     const item: Item = {
       container,
-      info,
-      isDirectory
+      info
     }
     yield item
-    if (isDirectory && deep(item)) {
+    if (info.isDirectory && deep(item)) {
       yield * traverseFileSystem(join(container, info.name!), deep)
     }
   }

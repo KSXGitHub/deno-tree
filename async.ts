@@ -1,13 +1,13 @@
-import { join } from "./deps.ts";
+import { join } from './deps.ts'
 
 /**
  * Type of values that {@link traverseFileSystem} yields
  */
 export interface Item {
   /** Path to directory that contains current item */
-  readonly container: string;
+  readonly container: string
   /** Stat info and name of current item */
-  readonly info: Deno.DirEntry;
+  readonly info: Deno.DirEntry
 }
 
 /**
@@ -18,7 +18,7 @@ export interface DeepFunc {
    * @param param Current item
    * @returns `true` to explore current item, `false` otherwise
    */
-  (param: Item): boolean;
+  (param: Item): boolean
 }
 
 /**
@@ -35,12 +35,12 @@ export async function* traverseFileSystem(
     const item: Item = {
       container,
       info,
-    };
-    yield item;
+    }
+    yield item
     if (info.isDirectory && deep(item)) {
-      yield* traverseFileSystem(join(container, info.name), deep);
+      yield* traverseFileSystem(join(container, info.name), deep)
     }
   }
 }
 
-export default traverseFileSystem;
+export default traverseFileSystem

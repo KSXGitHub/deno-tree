@@ -31,7 +31,7 @@ export async function* traverseFileSystem(
   container: string,
   deep: DeepFunc,
 ): AsyncGenerator<Item, void, unknown> {
-  for await (const info of Deno.readdir(container)) {
+  for await (const info of Deno.readDir(container)) {
     const item: Item = {
       container,
       info,

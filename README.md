@@ -1,5 +1,7 @@
 # Deno Tree
 
+[![Test](https://github.com/KSXGitHub/deno-tree/workflows/Test/badge.svg)](https://github.com/KSXGitHub/deno-tree/actions?query=workflow%3ATest)
+
 [Deno](https://deno.land)'s library to traverse filesystem tree.
 
 ## Usage

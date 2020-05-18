@@ -31,7 +31,7 @@ jobs:
         with:
           deno-version: 1.0.0
       - name: Cache and Type Check
-        run: deno cache --unstable **/*.ts
+        run: deno cache --unstable ${{ glob('**/*.ts') }}
       - name: Prepare for uploading deno cache as artifacts
         run: cp -r ~/.cache/deno deno-cache.tmp
       - name: Upload deno cache as artifacts

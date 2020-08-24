@@ -45,4 +45,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: KSXGitHub/github-actions-sane-fmt@0.4.1
+      - uses: KSXGitHub/github-actions-sane-fmt@0.4.2
